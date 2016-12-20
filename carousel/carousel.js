@@ -32,28 +32,6 @@ if(document.addEventListener){
     ele.detachEvent('on'+type,callback);
   }
 }
-// function prev_left(){ //合并
-	//|| box_width = box.clientWidth;
-	//|| carousel_left = carousel.style.left.match(/[-]*\d*/)[0]-0;
-	//|| carousel_left === 0 ? carousel.style.left = -(box_width*4)+'px' : 
-	//|| 										 carousel.style.left = carousel_left+box_width+'px';
-	//| left_num === 1 ?(carousel.style.left = carousel_left_arr[5] + 'px',
-	//| 								left_num = 5 ): 
-	//| 								carousel.style.left = carousel_left_arr[--left_num] + 'px';
-	// anime(+box_width);
-// }
-// function next_right(e){ //合并
-	//|| box_width = box.clientWidth;
-	//|| carousel_left = carousel.style.left.match(/[-]*\d*/)[0]-0;
-	//|| carousel_left === -(box_width*4) ? carousel.style.left = '0px' : 
-	//|| 																	carousel.style.left = carousel_left+(-box_width)+'px';
-	//| left_num === 5 ?(carousel.style.left = carousel_left_arr[1] + 'px',
-	//| 								left_num = 1 ): 
-	//| 								carousel.style.left = carousel_left_arr[++left_num] + 'px';
-	// console.log(e.target.className);
-	// anime(-box_width);
-// }
-
 // 更新储存所有图片的位置数组
 function up_arr(){ 
 	box_width = box.clientWidth;
@@ -61,7 +39,7 @@ function up_arr(){
 	for(j=0; j<7; j++){
 		carousel_left_arr.push(-box_width*j);
 	}
-	console.log(carousel_left_arr)
+	// console.log(carousel_left_arr)
 }
 function anime_auto(){
 	interval_auto = setInterval(function() {

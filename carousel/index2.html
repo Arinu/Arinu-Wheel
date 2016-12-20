@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Document</title>
+	<link rel="stylesheet" href="./carousel2.css">
+</head>
+<body>
+	<div class="box">
+		<div class="carousel">
+			<div class="image active">
+				<img src="./Steins_Gate_Fukaryouiki_no_Dejavu_1.jpg" alt="">
+			</div>
+			<div class="image">
+				<img src="./Steins_Gate_Fukaryouiki_no_Dejavu_2.jpg" alt="">
+			</div>
+			<div class="image">
+				<img src="./Steins_Gate_Fukaryouiki_no_Dejavu_3.jpg" alt="">
+			</div>
+			<div class="image">
+				<img src="./Love_Live!_two_1.jpg" alt="">
+			</div>
+			<div class="image">
+				<img src="./The_Garden_of_Words-Kotonoha_no_Niwa_1.jpg" alt="">
+			</div>
+		</div>
+		<a href="#" class="prev">&lsaquo;</a>
+		<a href="#" class="next">&rsaquo;</a>
+		<ul class='li-group'>
+			<li class="active"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</html>
+<script>
+function carou(box) {
+	var box = document.querySelector('.box'),
+		carousel = box.querySelector('.carousel'),
+		images = carousel.querySelectorAll('.image'),
+		prev = box.querySelector('.prev'),
+		next = box.querySelector('.next'),
+		li_group = box.querySelector('.li-group'),
+		lis = li_group.querySelectorAll('li');
+	addevent();
+	li_event();
+	function addevent(){
+		next.addEventListener('click',next_move,false);
+		prev.addEventListener('click',prev_move,false);
+	}
+	function removeevent(){
+		next.removeEventListener('click',next_move,false);
+		prev.removeEventListener('click',prev_move,false);
+	}
+
+	function next_move(e,val){
+		var i = active_move(images,'image '); //当前图片索引
+		var j = val!==undefined ? val : i !== images.length-1 ? i+1 : 0; //目标图片索引
+		li_active(j);
+		removeevent();
+		setTimeout(function(){
+			images[i].setAttribute('class','image active left');
+		},0)
+		images[j].setAttribute('class','image next');
+		setTimeout(function(){
+			images[j].setAttribute('class','image next left');
+		},0)
+		setTimeout(function(){
+			images[j].setAttribute('class','image active');
+		},500)
+		setTimeout(function(){
+			images[i].setAttribute('class','image')
+		},500)
+		setTimeout(addevent,500)
+	}
+	function prev_move(e,val){
+		var i = active_move(images,'image '); //当前图片索引
+		var j = val!==undefined ? val : i !== 0 ? i-1 : images.length-1; //目标图片索引
+		li_active(j);
+		removeevent();
+		setTimeout(function(){
+			images[i].setAttribute('class','image active right');
+		},0)
+		images[j].setAttribute('class','image prev');
+		setTimeout(function(){
+			images[j].setAttribute('class','image prev right');
+		},0)
+		setTimeout(function(){
+			images[j].setAttribute('class','image active');
+		},500)
+		setTimeout(function(){
+			images[i].setAttribute('class','image')
+		},500)
+		setTimeout(addevent,500)
+	}
+	function active_move(NodeArr,val){
+		for(var i=0; i<NodeArr.length; i++){
+			if(NodeArr[i].getAttribute('class') === val+'active'){
+				return i
+			}
+		}
+	}
+	function li_event(val) {
+		var now = active_move(lis,''); //当前li索引
+		for(var i=0; i<lis.length; i++){
+			(function(i){
+				lis[i].onclick = val!==undefined ? val : li_click(now,i)
+			})(i)
+		}
+	}
+	function li_active(i){
+		for(var j=0; j<lis.length; j++){
+			lis[j].setAttribute('class','');
+		}
+		lis[i].setAttribute('class','active')
+	}
+	function li_click(now,i){
+		return function(){
+			if(now === i) return false;
+			li_event(null)
+			li_active(i)
+			now < i ? next_move(false,i) : prev_move(false,i);
+			setTimeout(li_event,500)
+		}
+	}
+}
+function resize(){
+  var TimeScroll = false,
+      box = document.querySelector('.box'),
+  		prev = box.querySelector('.prev'),
+      next = box.querySelector('.next');
+  return function(){
+    if(TimeScroll) return false;
+    TimeScroll = true;
+    setTimeout(function(){
+      prev.style.lineHeight = next.style.lineHeight = box.clientHeight + 'px' ;
+      TimeScroll = false;
+    },500)
+  }
+}
+window.onload = function(){
+  carou()
+  resize()()
+}
+window.onresize = resize()
+</script>
+</body>

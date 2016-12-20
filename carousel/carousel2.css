@@ -1,0 +1,104 @@
+*{
+	margin: 0;
+	padding: 0;
+   box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+}
+.box{
+	width: 100%;
+	margin: 0 auto;
+   line-height: 0;
+   font-size: 0;
+   position: relative;
+   overflow: hidden;
+}
+.box .carousel{
+	position: relative;
+}
+.box .carousel .image{
+	position: relative;
+	top: 0;
+	width: 100%;
+	display: none;
+	transition: left .5s;
+}
+.box .carousel .active{
+	display: block;
+	left: 0;
+}
+.box .carousel .next{
+	position: absolute;
+	display: block;
+	left: 100%;
+	z-index: 1;
+}
+.box .carousel .prev{
+	position: absolute;
+	display: block;
+	left: -100%;
+	z-index: 1;
+}
+.box .carousel .active.left{
+	left: -100%;
+}
+.box .carousel .next.left{
+	left: 0;
+}
+.box .carousel .active.right{
+	left: 100%;
+}
+.box .carousel .prev.right{
+	left: 0%;
+}
+.box a{
+	position: absolute;
+	width: 8%;
+	text-align: center;
+	top: 0;
+	z-index: 2;
+	font-size: 90px;
+	color: rgb(0, 220, 211);
+	text-decoration: none;
+	opacity: 0;
+	transition: .3s;
+}
+.box:hover a{
+	opacity: .9;
+}
+.box > a.prev{
+	left: 0;
+}
+.box > a.next{
+	right: 0;
+}
+.box .li-group{
+	position: absolute;
+	bottom: 20px;
+	width: 50%;
+	left: 50%;
+	z-index: 2;
+	text-align: center;
+	margin-left: -25%;
+}
+.box .li-group li{
+	background-color:rgba(255,255,255,0);
+	display: inline-block;
+	list-style: none;
+	width: 15px;
+	height: 15px;
+	margin: 5px;
+	border-radius: 50%;
+	border: 2px solid rgb(255,255,255);
+	cursor: pointer;
+}
+.box .li-group li.active{
+	background-color: rgb(255,255,255);
+}
+@media (max-width:1280px){
+	.box{
+		width: 100%;
+	}
+	.box .carousel img{
+		width: 100%;
+	}
+}
