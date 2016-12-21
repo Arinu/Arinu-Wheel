@@ -5,7 +5,7 @@
    -webkit-box-sizing: border-box;
 }
 .box{
-	width: 100%;
+	width: 1280px;
 	margin: 0 auto;
    line-height: 0;
    font-size: 0;
@@ -18,9 +18,13 @@
 .box .carousel .image{
 	position: relative;
 	top: 0;
-	width: 100%;
+	width: 1280px;
 	display: none;
 	transition: left .5s;
+}
+.box .carousel .image img{
+  display: block;
+  width: 1280px
 }
 .box .carousel .active{
 	display: block;
